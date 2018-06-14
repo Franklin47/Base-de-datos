@@ -1,0 +1,103 @@
+CREATE DATABASE futbol;
+USE futbol;
+ 
+CREATE TABLE equipos (
+Id_equipo INT NOT NULL AUTO_INCREMENT,
+Nombre_equipo VARCHAR(45)NOT NULL,
+Numero_jugadores INT(5)NOT NULL, 
+Fecha_fundacion DATE, 
+Jugador_estrella VARCHAR(45)NOT NULL,
+PRIMARY KEY(Id_equipo)
+);
+
+USE futbol;
+ALTER TABLE equipos
+ADD Color_camiseta VARCHAR(50) NOT NULL;
+
+ 
+ 
+ 
+ 
+ 
+ 
+CREATE TABLE jugadores (
+Id_jugador INT NOT NULL AUTO_INCREMENT,
+Nombre_jugador VARCHAR(45)NOT NULL,
+Edad INT(5)NOT NULL, 
+Fecha_nacimiento DATE, 
+Equipo VARCHAR(45)NOT NULL,
+PRIMARY KEY(Id_jugador)
+);
+ 
+ 
+CREATE TABLE estadios (
+Id_estadios INT NOT NULL AUTO_INCREMENT,
+Nombre_estadio VARCHAR(45)NOT NULL,
+Numero_equipo INT(5)NOT NULL,    
+Fecha_fundacion DATE, 
+Fundador_estadio VARCHAR(45)NOT NULL,
+PRIMARY KEY(Id_estadios)
+);
+ 
+ 
+CREATE TABLE entrenadores (
+Id_entrenadores INT NOT NULL AUTO_INCREMENT,
+Nombre_entrenador VARCHAR(45)NOT NULL,      
+Edad INT(5)NOT NULL, 
+Numero_equipos INT(5)NOT NULL, 
+Equipo_actual VARCHAR(45)NOT NULL,
+PRIMARY KEY(Id_entrenadores)
+);
+ 
+ 
+ 
+ 
+ 
+CREATE TABLE ganadores_campeonato (
+Id_ganador INT NOT NULL AUTO_INCREMENT,
+Nombre_equipo VARCHAR(45)NOT NULL,         
+Año_gano INT(5)NOT NULL, 
+Rival_final VARCHAR (45)NOT NULL,
+Goles_totales INT(5)NOT NULL,
+PRIMARY KEY(Id_ganador)
+);
+
+		-- codigo para insertar datos a las tablas --
+
+
+USE futbol;
+
+INSERT INTO equipos (Nombre_equipo,Numero_jugadores,Fecha_fundacion,Jugador_estrella,Color_camiseta) VALUES ('Manchester', '24', '1987/06/07', 'Zlatan','Rojo');
+INSERT INTO equipos (Nombre_equipo,Numero_jugadores,Fecha_fundacion,Jugador_estrella,Color_camiseta) VALUES ('Barcelona', '32', '1923/09/02', 'Messi','Rojo-Azul');
+INSERT INTO equipos (Nombre_equipo,Numero_jugadores,Fecha_fundacion,Jugador_estrella,Color_camiseta) VALUES ('Barcelona', '32', '1923/09/02', 'Suares','Rojo-Azul');
+
+
+
+
+INSERT INTO jugadores (Nombre_jugador,Edad,Fecha_nacimiento,Equipo) VALUES ('Zlatan', '33', '1987/06/07', 'Paris Saint German');
+INSERT INTO jugadores (Nombre_jugador,Edad,Fecha_nacimiento,Equipo) VALUES ('Messi', '30', '1987/06/07', 'Barcelona');
+
+
+
+INSERT INTO estadios (Nombre_estadio,Numero_equipo,Fecha_fundacion,Fundador_estadio) VALUES ('Old Trandford', '7', '1987/06/07', ' ALEXANDRE');
+INSERT INTO estadios (Nombre_estadio,Numero_equipo,Fecha_fundacion,Fundador_estadio) VALUES ('Cap Now', '12', '1987/06/07', ' ARTHUR');
+
+
+INSERT INTO entrenadores (Nombre_entrenador,Edad,Numero_equipos,Equipo_actual) VALUES ('Mourinho', '42', '12', ' Manchester United');
+INSERT INTO entrenadores (Nombre_entrenador,Edad,Numero_equipos,Equipo_actual) VALUES ('Guardiola', '45', '15', ' Manchester City');
+
+
+
+INSERT INTO ganadores_campeonato (Nombre_equipo,Año_gano,Rival_final,Goles_totales) VALUES ('Manchester United','1995', 'Chelsea', '3');
+INSERT INTO ganadores_campeonato (Nombre_equipo,Año_gano,Rival_final,Goles_totales) VALUES ('Barcelona', '1989', 'Real Madrid', '5');
+
+
+-- codigo para consultar datos  repetidos de una columna de una tabla --
+
+
+select
+Nombre_equipo, 
+count(Nombre_equipo) as cantidad
+from equipos
+group by 
+Nombre_equipo;
