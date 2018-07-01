@@ -1,0 +1,94 @@
+create database Planeta ;
+use Planeta;
+
+create table Continentes(
+id int auto_increment primary key,
+nombre varchar (50) not null
+);
+
+create table Paises(
+id int auto_increment primary key,
+nombre varchar (50) not null,
+idContinentes int (20) not null,
+foreign key  (idContinentes) references Continentes(id)
+);
+
+create table Provincias(
+id int auto_increment primary key,
+nombre varchar (50) not null,
+idProvincias int (20) not null,
+foreign key  (idProvincias) references Paises(id)
+);
+
+create table Cantones(
+id int auto_increment primary key,
+nombre varchar (50) not null,
+idCantones int (20) not null,
+foreign key  (idCantones) references Provincias(id)
+);
+
+create table Parroquias(
+id int auto_increment primary key,
+nombre varchar (50) not null,
+idParroquias int (20) not null,
+foreign key  (idParroquias) references Cantones(id)
+);
+
+
+
+INSERT INTO Continentes (nombre) VALUES
+('America'),
+('Africa');
+
+
+INSERT INTO Paises (nombre,idContinentes) VALUES
+('Ecuador',1),
+('Camerun',2);
+
+
+INSERT INTO Provincias (nombre,idProvincias) VALUES
+('Pichincha',1),
+('Bertoua',2);
+
+
+INSERT INTO Cantones (nombre,idCantones) VALUES
+('Quito',1),
+('Koundé',2);
+
+
+INSERT INTO Parroquias (nombre,idParroquias) VALUES
+('Guamani',1),
+('Mbigoro',2);
+
+
+create table UbicacionGeografica(
+id int auto_increment primary key,
+Continentes varchar(20) not null,
+
+Paises varchar(20) not null,
+idPaises int (20) not null,
+foreign key  (idPaises) references UbicacionGeografica(id),
+
+Provincias varchar(20) not null,
+idProvincias int (20) not null,
+foreign key  (idProvincias) references UbicacionGeografica(id),
+
+Cantones varchar(20) not null,
+idCantones int (20) not null,
+foreign key  (idCantones) references UbicacionGeografica(id),
+
+Parroquias varchar(20) not null,
+idParroquias int (20) not null,
+foreign key  (idParroquias) references UbicacionGeografica(id)	 
+);
+
+INSERT INTO UbicacionGeografica (Continentes,Paises,idPaises,Provincias,idProvincias,Cantones,idCantones,Parroquias,idParroquias) VALUES
+('America','Ecuador',1,'Pichincha',1,'Quito',1,'Guamanni',1),
+('Africano','Camerun',2,'Cotopaxi',1,'Koundé',2,'Amaguaña',1);
+
+
+select id, Continentes, Paises, Provincias, Cantones, Parroquias from UbicacionGeografica 
+
+select nombre from Continentes, Paises
+
+select Continentes, Paises from UbicacionGeografica where id=2 GROUP BY Paises
